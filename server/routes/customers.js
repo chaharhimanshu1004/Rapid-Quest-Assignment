@@ -134,6 +134,82 @@ router.get('/repeat-customers', async (req, res) => {
     }
 });
 
+router.get('/customers-distribution', async (req, res) => {
+    try {
+        const db = mongoose.connection.db;
+        if (!db) {
+            return res.status(500).json({ message: 'Database instance not available' });
+        }
+
+        // Aggregate customer data by city
+        const customerDistribution = await db.collection('shopifyCustomers').aggregate([
+            {
+                $group: {
+                    _id: "$default_address.city",  
+                    count: { $sum: 1 } 
+                }
+            },
+            {
+                $sort: { count: -1 }
+            }
+        ]).toArray();
+
+        res.json(customerDistribution);
+    } catch (error) {
+        console.error('Error fetching geographical distribution:', error);
+        res.status(500).json({ message: 'Error fetching geographical distribution', error });
+    }
+});
+
+router.get('/customer-lifetime-value', async (req, res) => {
+    try {
+        const db = mongoose.connection.db;
+        if (!db) {
+            return res.status(500).json({ message: 'Database instance not available' });
+        }
+
+        const lifetimeValueByCohort = await db.collection('shopifyOrders').aggregate([
+            {
+                $addFields: {
+                    created_at: {
+                        $dateFromString: {
+                            dateString: "$created_at",
+                            onError: new Date()  // Default to current date if conversion fails
+                        }
+                    }
+                }
+            },
+            {
+                $group: {
+                    _id: {
+                        customerId: "$customer_id",
+                        firstPurchaseMonth: { $dateToString: { format: "%Y-%m", date: "$created_at" } }
+                    },
+                    totalSpent: { $sum: { $toDouble: "$total_price" } },
+                }
+            },
+            {
+                $group: {
+                    _id: "$_id.firstPurchaseMonth",
+                    cohortValue: { $avg: "$totalSpent" },
+                    customersCount: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { _id: 1 }
+            }
+        ]).toArray();
+
+        res.json(lifetimeValueByCohort);
+    } catch (error) {
+        console.error('Error fetching customer lifetime value:', error);
+        res.status(500).json({ message: 'Error fetching customer lifetime value', error });
+    }
+});
+
+
+
+
 
 
 

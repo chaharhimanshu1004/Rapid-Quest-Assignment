@@ -21,7 +21,7 @@ const SalesGrowthChart = () => {
         };
 
         fetchData();
-    }, [interval]); // Refetch data when interval changes
+    }, [interval]); 
 
     const chartData = {
         labels: data.map(d => d.period),
@@ -72,9 +72,9 @@ const SalesGrowthChart = () => {
     };
 
     return (
-        <div style={{ textAlign: 'center', margin: '20px' }}>
+        <div style={{ textAlign: 'center', margin: '20px' ,fontSize: '2rem', fontWeight: 'bold',font:'#f5f5f5'}}>
             <h1>Sales Dashboard</h1>
-    <label htmlFor="interval-select" style={{ fontSize: '1.2rem', color: '#555', marginRight: '10px' }}>
+    <label htmlFor="interval-select" style={{ fontSize: '1.2rem', color: '#f5f5f5', marginRight: '10px' }}>
         Select Interval:
     </label>
     <select
@@ -82,12 +82,14 @@ const SalesGrowthChart = () => {
         value={interval}
         onChange={(e) => setInterval(e.target.value)}
         style={{
-            fontSize: '1rem',
+            fontSize: '1.1rem',
+            fontWeight: 'bold',
             padding: '5px 10px',
             borderRadius: '4px',
             border: '1px solid #ccc',
-            backgroundColor: '#f9f9f9',
-            cursor: 'pointer'
+            backgroundColor: '#000000',
+            cursor: 'pointer',
+            font:'white'
         }}
     >
         <option value="daily">Daily</option>

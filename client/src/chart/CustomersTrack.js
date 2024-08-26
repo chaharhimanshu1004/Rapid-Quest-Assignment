@@ -66,11 +66,12 @@ const NewCustomersChart = () => {
     };
 
     return (
-        <div style={{ textAlign: 'center', margin: '20px' }}>
+        <div style={{ textAlign: 'center', margin: '20px',fontSize: '2rem', fontWeight: 'bold',font:'#e0e0e0' }}>
             <h1>New Customers Over Time</h1>
-            <label htmlFor="interval-select" style={{ fontSize: '1.2rem', color: '#555', marginRight: '10px' }}>
+            <label htmlFor="interval-select" style={{ fontSize: '1.2rem' ,color: '#e0e0e0'}}>
                 Select Interval:
             </label>
+            
             <select
                 id="interval-select"
                 value={interval}
@@ -80,7 +81,7 @@ const NewCustomersChart = () => {
                     padding: '5px 10px',
                     borderRadius: '4px',
                     border: '1px solid #ccc',
-                    backgroundColor: '#f9f9f9',
+                    backgroundColor: '#000000',
                     cursor: 'pointer'
                 }}
             >
