@@ -12,7 +12,7 @@ const SalesGrowthChart = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}api/sales/sales-growth-rate?interval=${interval}`);
+                const response = await fetch(`https://rapid-quest-assignment.onrender.com/api/sales/sales-growth-rate?interval=${interval}`);
                 const result = await response.json();
                 setData(result);
             } catch (error) {
