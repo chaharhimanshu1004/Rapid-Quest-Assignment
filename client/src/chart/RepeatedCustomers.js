@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
-
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const RepeatCustomersChart = () => {
@@ -11,14 +10,13 @@ const RepeatCustomersChart = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:6002/api/customers/repeat-customers?interval=${interval}`);
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}api/customers/repeat-customers?interval=${interval}`);
                 const result = await response.json();
                 setData(result);
             } catch (error) {
                 console.error('Error fetching repeat customers data:', error);
             }
         };
-
         fetchData();
     }, [interval]);
 

@@ -49,14 +49,14 @@ const Home = () => {
             color: '#ccc', 
             marginBottom: '25px' 
         }}>
-            This is a simple sales dashboard application.
+            This is a sales dashboard application.
         </h2>
         <h3 style={{
             fontSize: '1.5rem', 
             color: '#aaa', 
             marginBottom: '40px' 
         }}>
-            Click on the respective links below to view the various charts:
+            IMPORTANT : Wait for sometime before clicking on the buttons below to see the data because backend is deployed on render.
         </h3>
         <button
             onClick={handleSalesClick}

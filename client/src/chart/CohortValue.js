@@ -7,7 +7,7 @@ const CustomerLifetimeValueChart = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:6002/api/customers/customer-lifetime-value');
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}api/customers/customer-lifetime-value`);
                 const result = await response.json();
                 setData(result);
             } catch (error) {

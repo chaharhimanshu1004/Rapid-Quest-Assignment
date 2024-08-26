@@ -11,7 +11,7 @@ export default function CustomersDistribution() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:6002/api/customers/customers-distribution");
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}api/customers/customers-distribution`);
         const data = await response.json();
         
         const formattedData = data.map(item => ({

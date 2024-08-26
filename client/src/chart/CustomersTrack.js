@@ -11,7 +11,7 @@ const NewCustomersChart = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:6002/api/customers/new-customers-track?interval=${interval}`);
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}api/customers/new-customers-track?interval=${interval}`);
                 const result = await response.json();
                 setData(result);
             } catch (error) {
